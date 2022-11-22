@@ -1,5 +1,7 @@
-import React from "react";
-
 export default function RootPage() {
-  return <div>RootPage</div>;
+  return (
+    <div>
+      <h1 className="text-3xl underline">Hello!</h1>
+    </div>
+  );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import "../styles/dist.css";
 
 export default function RootLayout({
   children,
@@ -7,7 +7,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className=" bg-slate-200 min-w-screen min-h-screen place-content-center">
+        {children}
+      </body>
     </html>
   );
 }
