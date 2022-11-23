@@ -8,9 +8,7 @@ interface TextProps {
 }
 
 function Text({ label, onChange, value, placeholder }: TextProps) {
-  const [internalValue, setInternalValue] = useState<string | undefined>(
-    undefined
-  );
+  const [internalValue, setInternalValue] = useState<string>("");
 
   const componentValue = value || internalValue;
 
