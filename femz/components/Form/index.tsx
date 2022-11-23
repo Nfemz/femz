@@ -1,4 +1,10 @@
-import { Children, cloneElement, ReactElement, useState } from "react";
+import {
+  ChangeEvent,
+  Children,
+  cloneElement,
+  ReactElement,
+  useState,
+} from "react";
 
 interface FormContainerProps {
   children: ReactElement<FormItemProps> | ReactElement<FormItemProps>[];
@@ -6,15 +12,19 @@ interface FormContainerProps {
   button: ReactElement;
 }
 
-function Container({ children, onSubmit, button }: FormContainerProps) {
+function Container<FormValueTypes>({
+  children,
+  onSubmit,
+  button,
+}: FormContainerProps) {
   const [formValues, setFormValues] = useState({});
 
-  function onChange(newValues: any) {
+  function onChange(newValues: FormValueTypes) {
     setFormValues((oldValues) => ({ ...oldValues, ...newValues }));
   }
 
   return (
-    <div className="flex flex-col space-y-8">
+    <div className="flex flex-col space-y-5">
       {Children.map(children, (child) => cloneElement(child, { onChange }))}
       {cloneElement(button, { onClick: () => onSubmit(formValues) })}
     </div>
@@ -29,7 +39,7 @@ interface FormItemProps {
 }
 
 function Item({ children, label, onChange, value }: FormItemProps) {
-  function handleChange(e: any) {
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
     onChange && onChange({ [value]: e.target.value });
   }
 
@@ -48,9 +58,18 @@ function Item({ children, label, onChange, value }: FormItemProps) {
   );
 }
 
+interface FormFooterProps {
+  children: ReactElement | ReactElement[];
+}
+
+function Footer({ children }: FormFooterProps) {
+  return <div className="flex flex-col space-y-5 mt-5">{children}</div>;
+}
+
 const Form = {
   Container,
   Item,
+  Footer,
 };
 
 export default Form;

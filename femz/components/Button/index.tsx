@@ -1,7 +1,7 @@
 import classNames from "../../utils/classNames";
 
 interface ButtonProps {
-  type: "primary" | "secondary" | "tertiary";
+  type?: "primary" | "secondary" | "tertiary";
   text: string;
   onClick?: () => void;
 }

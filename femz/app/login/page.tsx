@@ -4,13 +4,18 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
 
+interface LoginFormValues {
+  username: string;
+  password: string;
+}
+
 export default function LoginPage() {
-  function onClick(vals: any) {
+  function onClick(vals: LoginFormValues) {
     console.log(vals);
   }
   return (
     <Card>
-      <Form.Container
+      <Form.Container<LoginFormValues>
         onSubmit={onClick}
         button={<Button text="Login" type="primary" />}
       >
@@ -21,6 +26,9 @@ export default function LoginPage() {
           <Input.Text />
         </Form.Item>
       </Form.Container>
+      <Form.Footer>
+        <Button text="Signup" onClick={() => {}} type="secondary" />
+      </Form.Footer>
     </Card>
   );
 }
