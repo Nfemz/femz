@@ -1,13 +1,15 @@
-import { PrismaClient, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
+import { GQLContext } from "../../../server";
 import { MutationLoginUserArgs } from "../resolvers-types";
 
-const prisma = new PrismaClient();
-
 export default async function loginUser(
-  _: any,
-  { input }: MutationLoginUserArgs
+  _parent: undefined,
+  { input }: MutationLoginUserArgs,
+  { prisma, user }: GQLContext
 ): Promise<User | null> {
+  if (user) return user;
+
   if (!input) return null;
 
   const { email, password } = input;

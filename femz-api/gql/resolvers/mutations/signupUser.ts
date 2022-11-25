@@ -1,14 +1,16 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { PrismaClient, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import { MutationSignupUserArgs } from "../resolvers-types";
-
-const prisma = new PrismaClient();
+import { GQLContext } from "../../../server";
 
 export default async function signupUser(
-  _: any,
-  { input }: MutationSignupUserArgs
+  _parent: undefined,
+  { input }: MutationSignupUserArgs,
+  { prisma, user }: GQLContext
 ): Promise<User | null> {
+  if (user) return user;
+
   if (!input) return null;
 
   const { email, password, firstName } = input;
