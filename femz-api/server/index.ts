@@ -5,10 +5,11 @@ import { loadFilesSync } from "@graphql-tools/load-files";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { mergeResolvers } from "@graphql-tools/merge";
 import path from "path";
+import type { Resolvers } from "../gql/resolvers/resolvers-types";
 
 async function main() {
   const typeDefs = await loadSchemaSync(
-    path.join(__dirname, "../gql/typeDefinitions/user.graphql"),
+    path.join(__dirname, "../gql/typeDefinitions/schema.graphql"),
     {
       loaders: [new GraphQLFileLoader()],
     }
@@ -18,9 +19,11 @@ async function main() {
     path.join(__dirname, "../gql/resolvers/**/index.ts")
   );
 
+  const resolvers: Resolvers = mergeResolvers(resolverFiles);
+
   const server = new ApolloServer({
     typeDefs,
-    resolvers: mergeResolvers(resolverFiles),
+    resolvers,
   });
 
   const { url } = await startStandaloneServer(server, {
