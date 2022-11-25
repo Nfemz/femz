@@ -10,9 +10,7 @@ interface LoginFormValues {
 }
 
 export default function LoginPage() {
-  function onClick(vals: LoginFormValues) {
-    console.log(vals);
-  }
+  function onClick(vals: LoginFormValues) {}
   return (
     <Card>
       <Form.Container<LoginFormValues>
