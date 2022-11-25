@@ -20,6 +20,7 @@
     "@types/node": "^18.11.9",
     "bcrypt": "^5.1.0",
     "concurrently": "^7.6.0",
+    "cors": "^2.8.5",
     "eslint": "^8.28.0",
     "graphql": "^16.6.0",
     "jsonwebtoken": "^8.5.1",
@@ -29,6 +30,7 @@
     "@graphql-codegen/typescript": "^2.8.2",
     "@graphql-codegen/typescript-resolvers": "^2.7.7",
     "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
     "nodemon": "^2.0.20",
     "prisma": "^4.6.1",
     "ts-node": "^10.9.1"
