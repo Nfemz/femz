@@ -46,6 +46,7 @@ const unauthorizedOperations = ["LoginUser", "SignupUser"];
     typeDefs,
     resolvers,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    introspection: true,
   });
   await server.start();
 

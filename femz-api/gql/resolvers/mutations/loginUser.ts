@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
+import { GraphQLError } from "graphql";
 import { GQLContext } from "../../../server";
 import { MutationLoginUserArgs } from "../resolvers-types";
 
@@ -16,10 +17,18 @@ export default async function loginUser(
 
   const encryptedPassword = await bcrypt.hash(password, 10);
 
-  return await prisma.user.findFirst({
+  const foundUser = prisma.user.findFirst({
     where: {
       email,
       password: encryptedPassword,
     },
   });
+
+  if (!foundUser) {
+    throw new GraphQLError(
+      "No user was found for this email and password combination"
+    );
+  }
+
+  return foundUser;
 }

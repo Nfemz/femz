@@ -10,12 +10,14 @@ interface FormContainerProps {
   children: ReactElement<FormItemProps> | ReactElement<FormItemProps>[];
   onSubmit: (values: any) => void;
   button: ReactElement;
+  errors?: string[];
 }
 
 function Container<FormValueTypes>({
   children,
   onSubmit,
   button,
+  errors,
 }: FormContainerProps) {
   const [formValues, setFormValues] = useState({});
 
@@ -27,6 +29,8 @@ function Container<FormValueTypes>({
     <div className="flex flex-col space-y-5">
       {Children.map(children, (child) => cloneElement(child, { onChange }))}
       {cloneElement(button, { onClick: () => onSubmit(formValues) })}
+      {errors &&
+        errors.map((err, i) => <p key={`login-error-msg-${i}`}>{err}</p>)}
     </div>
   );
 }

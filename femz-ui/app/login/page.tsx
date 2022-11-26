@@ -3,19 +3,37 @@ import Card from "../../components/Card";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
+import useLoginUser from "../../graphql/mutations/loginUser";
+import { useState } from "react";
 
 interface LoginFormValues {
-  username: string;
+  email: string;
   password: string;
 }
 
 export default function LoginPage() {
-  function onClick(vals: LoginFormValues) {}
+  const [loginUser, { loading }] = useLoginUser();
+  const [loginErrors, setLoginErrors] = useState<string[]>([]);
+
+  function submitLoginForm(vals: LoginFormValues) {
+    loginUser({
+      variables: {
+        input: {
+          ...vals,
+        },
+      },
+      onError: ({ graphQLErrors }) => {
+        setLoginErrors(graphQLErrors.map((err) => err.message));
+      },
+    });
+  }
+
   return (
     <Card>
       <Form.Container<LoginFormValues>
-        onSubmit={onClick}
+        onSubmit={submitLoginForm}
         button={<Button text="Login" type="primary" />}
+        errors={loginErrors}
       >
         <Form.Item label="Username" value="username">
           <Input.Text />
