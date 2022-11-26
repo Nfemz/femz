@@ -57,6 +57,10 @@ const unauthorizedOperations = ["LoginUser", "SignupUser"];
     bodyParser.json(),
     expressMiddleware<GQLContext>(server, {
       context: async ({ req }) => {
+        if (req.body.query.includes("query IntrospectionQuery")) {
+          return { user: null, prisma };
+        }
+
         const token = req.headers.authorization;
 
         const user = token

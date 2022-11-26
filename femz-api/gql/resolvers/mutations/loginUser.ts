@@ -15,6 +15,13 @@ export default async function loginUser(
 
   const { email, password } = input;
 
+  if (!email) {
+    throw new GraphQLError("Email is required");
+  }
+  if (!password) {
+    throw new GraphQLError("Password is required");
+  }
+
   const encryptedPassword = await bcrypt.hash(password, 10);
 
   const foundUser = await prisma.user.findFirst({
