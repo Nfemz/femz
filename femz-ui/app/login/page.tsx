@@ -35,7 +35,7 @@ export default function LoginPage() {
         button={<Button text="Login" type="primary" />}
         errors={loginErrors}
       >
-        <Form.Item label="Username" value="username">
+        <Form.Item label="Email" value="email">
           <Input.Text />
         </Form.Item>
         <Form.Item label="Password" value="password">

@@ -29,8 +29,15 @@ function Container<FormValueTypes>({
     <div className="flex flex-col space-y-5">
       {Children.map(children, (child) => cloneElement(child, { onChange }))}
       {cloneElement(button, { onClick: () => onSubmit(formValues) })}
-      {errors &&
-        errors.map((err, i) => <p key={`login-error-msg-${i}`}>{err}</p>)}
+      {errors && (
+        <div>
+          {errors.map((err, i) => (
+            <p className="text-red-600 text-sm" key={`login-error-msg-${i}`}>
+              {err}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default async function loginUser(
 
   const encryptedPassword = await bcrypt.hash(password, 10);
 
-  const foundUser = prisma.user.findFirst({
+  const foundUser = await prisma.user.findFirst({
     where: {
       email,
       password: encryptedPassword,
@@ -26,7 +26,7 @@ export default async function loginUser(
 
   if (!foundUser) {
     throw new GraphQLError(
-      "No user was found for this email and password combination"
+      "No user was found for this email and password combination. Please try again."
     );
   }
 
