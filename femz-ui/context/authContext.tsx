@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useEffect, useReducer } from "react";
 import jwtDecode from "jwt-decode";
 
@@ -52,7 +53,10 @@ function AuthProvider(props: any) {
     localStorage.setItem("user-token", userData.token);
     dispatch({
       type: "LOGIN",
-      payload: userData,
+      payload: {
+        email: userData.email,
+        id: userData.id,
+      },
     });
   }
 

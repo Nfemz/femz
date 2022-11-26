@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "@prisma/client";
-import { InputMaybe, MutationSignupUserArgs } from "../resolvers-types";
+import { MutationSignupUserArgs } from "../resolvers-types";
 import { GQLContext } from "../../../server";
 import { GraphQLError } from "graphql";
 import isEmail from "../../../helpers/isEmail";

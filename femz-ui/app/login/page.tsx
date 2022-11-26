@@ -4,8 +4,9 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
 import useLoginUser from "../../graphql/mutations/loginUser";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AuthContext } from "../../context/authContext";
 
 interface LoginFormValues {
   email: string;
@@ -16,6 +17,7 @@ export default function LoginPage() {
   const [loginUser, { loading }] = useLoginUser();
   const [loginErrors, setLoginErrors] = useState<string[]>([]);
   const router = useRouter();
+  const { login } = useContext(AuthContext);
 
   function submitLoginForm(vals: LoginFormValues) {
     loginUser({
@@ -26,6 +28,11 @@ export default function LoginPage() {
       },
       onError: ({ graphQLErrors }) => {
         setLoginErrors(graphQLErrors.map((err) => err.message));
+      },
+      onCompleted: (data) => {
+        setLoginErrors([]);
+        login(data.loginUser);
+        router.push("/");
       },
     });
   }
@@ -45,7 +52,7 @@ export default function LoginPage() {
           <Input.Text />
         </Form.Item>
         <Form.Item label="Password" value="password">
-          <Input.Text />
+          <Input.Text type="password" />
         </Form.Item>
       </Form.Container>
       <Form.Footer>

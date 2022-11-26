@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
+import { AuthContext } from "../../context/authContext";
 import useSignupUser from "../../graphql/mutations/signupUser";
 
 interface SignupFormValues {
@@ -24,8 +25,10 @@ export default function SignupPage() {
         },
       },
       onError: (e) => {
-        console.log({ e });
         setSignupErrors(e.graphQLErrors.map((err) => err.message));
+      },
+      onCompleted: (data) => {
+        setSignupErrors([]);
       },
     });
   }
@@ -37,14 +40,17 @@ export default function SignupPage() {
         button={<Button text="Signup" type="primary" loading={loading} />}
         errors={signupErrors}
       >
+        <Form.Item label="First name" value="firstName">
+          <Input.Text />
+        </Form.Item>
         <Form.Item label="Email" value="email">
           <Input.Text />
         </Form.Item>
         <Form.Item label="Password" value="password">
-          <Input.Text />
+          <Input.Text type="password" />
         </Form.Item>
         <Form.Item label="Re-enter password" value="passwordCopy">
-          <Input.Text />
+          <Input.Text type="password" />
         </Form.Item>
       </Form.Container>
     </Card>

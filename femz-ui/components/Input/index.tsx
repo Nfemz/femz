@@ -5,9 +5,16 @@ interface TextProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   placeholder?: string;
+  type?: "text" | "password";
 }
 
-function Text({ label, onChange, value, placeholder }: TextProps) {
+function Text({
+  label,
+  onChange,
+  value,
+  placeholder,
+  type = "text",
+}: TextProps) {
   const [internalValue, setInternalValue] = useState<string>("");
 
   const componentValue = value || internalValue;
@@ -29,11 +36,11 @@ function Text({ label, onChange, value, placeholder }: TextProps) {
       )}
       <input
         className=" appearance-none focus:outline-none focus:shadow-inner focus:border-slate-300 rounded border-2 border-slate-200 w-full h-9 caret-slate-300 p-2"
-        type="text"
         id={label}
         value={componentValue}
         onChange={handleChange}
         placeholder={placeholder}
+        type={type}
       />
     </div>
   );

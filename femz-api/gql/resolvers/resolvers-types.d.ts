@@ -50,6 +50,7 @@ export type User = {
   __typename?: 'User';
   email: Scalars['String'];
   firstName: Scalars['String'];
+  id: Scalars['String'];
   lastName: Scalars['String'];
   password: Scalars['String'];
   token: Scalars['String'];
@@ -157,6 +158,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
