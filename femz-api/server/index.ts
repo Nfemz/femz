@@ -51,7 +51,7 @@ const unauthorizedOperations = ["LoginUser", "SignupUser"];
   await server.start();
 
   app.use(
-    "/",
+    "/graphql",
     cors<cors.CorsRequest>(),
     bodyParser.json(),
     expressMiddleware<GQLContext>(server, {

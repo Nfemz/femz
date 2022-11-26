@@ -32,7 +32,7 @@ export default function LoginPage() {
     <Card>
       <Form.Container<LoginFormValues>
         onSubmit={submitLoginForm}
-        button={<Button text="Login" type="primary" />}
+        button={<Button text="Login" type="primary" loading={loading} />}
         errors={loginErrors}
       >
         <Form.Item label="Email" value="email">
