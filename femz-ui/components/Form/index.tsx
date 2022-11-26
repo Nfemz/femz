@@ -47,9 +47,16 @@ interface FormItemProps {
   label?: string;
   value: string;
   onChange?: (value: any) => void;
+  required?: boolean;
 }
 
-function Item({ children, label, onChange, value }: FormItemProps) {
+function Item({
+  children,
+  label,
+  onChange,
+  value,
+  required = false,
+}: FormItemProps) {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     onChange && onChange({ [value]: e.target.value });
   }

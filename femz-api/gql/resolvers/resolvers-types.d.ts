@@ -43,6 +43,7 @@ export type SignupUserInput = {
   email: Scalars['String'];
   firstName: Scalars['String'];
   password: Scalars['String'];
+  passwordCopy: Scalars['String'];
 };
 
 export type User = {
@@ -51,6 +52,7 @@ export type User = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   password: Scalars['String'];
+  token: Scalars['String'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -157,6 +159,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

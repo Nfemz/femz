@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken";
 import { User } from "@prisma/client";
 import { MutationSignupUserArgs } from "../resolvers-types";
 import { GQLContext } from "../../../server";
+import { GraphQLError } from "graphql";
+import validateInput from "../../../helpers/validateInput";
+import isEmail from "../../../helpers/isEmail";
 
 export default async function signupUser(
   _parent: undefined,
@@ -13,7 +16,17 @@ export default async function signupUser(
 
   if (!input) return null;
 
-  const { email, password, firstName } = input;
+  const { email, password, firstName, passwordCopy } = input;
+
+  validateInput(input, ["email", "password"]);
+
+  if (!isEmail(email)) {
+    throw new GraphQLError("Not a valid email format");
+  }
+
+  if (password !== passwordCopy) {
+    throw new GraphQLError("Passwords must match");
+  }
 
   const encryptedPassword = await bcrypt.hash(password, 10);
 

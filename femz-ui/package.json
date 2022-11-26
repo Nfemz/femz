@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"next dev\" \"tailwindcss -i styles/globals.css -o styles/dist.css -w\"",
+    "gen": "apollo client:codegen --target typescript --localSchemaFile ../femz-api/gql/typeDefinitions/schema.graphql --outputFlat --includes graphql/**/*.ts --excludes graphql/types graphql/types",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

@@ -12,12 +12,14 @@ type User {
   lastName: String!
   email: String!
   password: String!
+  token: String!
 }
 
 input SignupUserInput {
   firstName: String!
   email: String!
   password: String!
+  passwordCopy: String!
 }
 
 input LoginUserInput {

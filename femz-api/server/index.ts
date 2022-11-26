@@ -13,6 +13,7 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import cors from "cors";
 import bodyParser from "body-parser";
 import { GraphQLError } from "graphql";
+import { ApolloServerErrorCode } from "@apollo/server/errors";
 
 export interface GQLContext extends BaseContext {
   user: User | null;

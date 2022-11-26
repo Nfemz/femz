@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import Form from "../../components/Form";
 import useLoginUser from "../../graphql/mutations/loginUser";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface LoginFormValues {
   email: string;
@@ -14,6 +15,7 @@ interface LoginFormValues {
 export default function LoginPage() {
   const [loginUser, { loading }] = useLoginUser();
   const [loginErrors, setLoginErrors] = useState<string[]>([]);
+  const router = useRouter();
 
   function submitLoginForm(vals: LoginFormValues) {
     loginUser({
@@ -26,6 +28,10 @@ export default function LoginPage() {
         setLoginErrors(graphQLErrors.map((err) => err.message));
       },
     });
+  }
+
+  function navigateToSignup() {
+    router.push("/signup");
   }
 
   return (
@@ -43,7 +49,7 @@ export default function LoginPage() {
         </Form.Item>
       </Form.Container>
       <Form.Footer>
-        <Button text="Signup" onClick={() => {}} type="secondary" />
+        <Button text="Signup" onClick={navigateToSignup} type="secondary" />
       </Form.Footer>
     </Card>
   );
