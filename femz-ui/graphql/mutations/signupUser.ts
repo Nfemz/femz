@@ -1,4 +1,8 @@
 import { gql, useMutation } from "@apollo/client";
+import {
+  SignupUserMutation,
+  SignupUserMutationVariables,
+} from "../types/graphql";
 
 const SIGNUP_USER = gql`
   mutation SignupUser($input: SignupUserInput) {
@@ -9,6 +13,10 @@ const SIGNUP_USER = gql`
   }
 `;
 
-const useSignupUser = (args?: any) => useMutation(SIGNUP_USER, args);
+const useSignupUser = (args?: any) =>
+  useMutation<SignupUserMutation, SignupUserMutationVariables>(
+    SIGNUP_USER,
+    args
+  );
 
 export default useSignupUser;

@@ -7,7 +7,7 @@ const config: CodegenConfig = {
     "./graphql/types/": {
       plugins: ["typescript-operations"],
       config: {
-        flattenGeneratedTypes: true,
+        gqlTagName: "gql",
       },
     },
   },
