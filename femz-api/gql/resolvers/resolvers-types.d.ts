@@ -1,6 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
+export type Maybe<T> = T | null | undefined;
+export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -14,8 +14,8 @@ export type Scalars = {
 };
 
 export type LoginUserInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -40,10 +40,10 @@ export type Query = {
 };
 
 export type SignupUserInput = {
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  password: Scalars['String'];
-  passwordCopy: Scalars['String'];
+  email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  passwordCopy?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {

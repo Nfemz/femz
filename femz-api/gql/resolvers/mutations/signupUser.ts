@@ -1,10 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "@prisma/client";
-import { MutationSignupUserArgs } from "../resolvers-types";
+import { InputMaybe, MutationSignupUserArgs } from "../resolvers-types";
 import { GQLContext } from "../../../server";
 import { GraphQLError } from "graphql";
-import validateInput from "../../../helpers/validateInput";
 import isEmail from "../../../helpers/isEmail";
 
 export default async function signupUser(
@@ -13,12 +12,22 @@ export default async function signupUser(
   { prisma, user }: GQLContext
 ): Promise<User | null> {
   if (user) return user;
-
   if (!input) return null;
 
   const { email, password, firstName, passwordCopy } = input;
 
-  validateInput(input, ["email", "password"]);
+  if (!firstName) {
+    throw new GraphQLError("First name is required");
+  }
+  if (!email) {
+    throw new GraphQLError("Email is required");
+  }
+  if (!password) {
+    throw new GraphQLError("Password is required");
+  }
+  if (!passwordCopy) {
+    throw new GraphQLError("Please re-enter your password");
+  }
 
   if (!isEmail(email)) {
     throw new GraphQLError("Not a valid email format");

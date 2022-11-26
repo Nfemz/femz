@@ -16,13 +16,13 @@ type User {
 }
 
 input SignupUserInput {
-  firstName: String!
-  email: String!
-  password: String!
-  passwordCopy: String!
+  firstName: String
+  email: String
+  password: String
+  passwordCopy: String
 }
 
 input LoginUserInput {
-  email: String!
-  password: String!
+  email: String
+  password: String
 }

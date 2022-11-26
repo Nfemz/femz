@@ -6,6 +6,8 @@ const config: CodegenConfig = {
     "gql/resolvers/resolvers-types.d.ts": {
       config: {
         useIndexSignature: true,
+        maybeValue: "T | null | undefined",
+        inputMaybeValue: "T | null | undefined",
       },
       plugins: ["typescript", "typescript-resolvers"],
     },
