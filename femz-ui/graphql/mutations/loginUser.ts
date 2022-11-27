@@ -9,6 +9,7 @@ const LOGIN_USER = gql`
     loginUser(input: $input) {
       email
       id
+      token
     }
   }
 `;
